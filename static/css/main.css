@@ -1,0 +1,44 @@
+body{
+    background-color: #FDFDD2;
+    margin: 0;
+    font-family: sans-serif;
+    color: #ffffff;
+      
+}
+.container {
+    background-image: url(../images/cookies_background.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% 150px;
+    background-position: top;
+    margin: 50px auto; /* margin around the container, adjust as needed */
+    max-width: 1400px; /* maximum width of the container */
+    padding: 20px; /* padding inside the container, adjust as needed */
+    background-color: #ffb6c1; /* background color of the container */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* optional box shadow */
+    border-radius: 10px;
+    height: 600px;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+  h1 {
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    font-family: sans-serif;
+  }
+  .project-description {
+    text-align: justify; /* Center the text */
+    margin-top: 30px; /* Add some space between the h1 and the text */
+    line-height: 1.5; /* Increase the space between lines of text */
+  }
+  p {
+    font-size: 25px;
+  }
