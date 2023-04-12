@@ -6,19 +6,38 @@ body{
       
 }
 .container {
+    position: relative;
     background-image: url(../images/cookies_background.jpg);
     background-repeat: no-repeat;
     background-position: center top;
     background-size: 100% 150px;
-    background-position: top;
-    margin: 50px auto; /* margin around the container, adjust as needed */
-    max-width: 1400px; /* maximum width of the container */
-    padding: 20px; /* padding inside the container, adjust as needed */
-    background-color: #ffb6c1; /* background color of the container */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* optional box shadow */
+    margin: 50px auto; 
+    max-width: 1400px; 
+    padding: 20px; 
+    background-color: #ffb6c1; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    height: 600px;
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+form {
+    height: 500px;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    background-image: url(../images/cupcake.png);
+    background-size: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
   img {
     width: 100%;
     height: auto;
@@ -26,7 +45,26 @@ body{
     margin: auto;
   }
   h1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
     margin-bottom: 50px;
+    align-self: flex-start;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    font-family: sans-serif;
+  }
+  h2{
+    position: relative;
+    left: 35%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    align-self: flex-start;
     text-align: center;
     font-size: 40px;
     color: #fff;
@@ -40,5 +78,34 @@ body{
     line-height: 1.5; /* Increase the space between lines of text */
   }
   p {
+    text-indent: 1em;
     font-size: 25px;
+  }
+  .redirect-button{
+    position:absolute;
+    top: 60px;
+    right: 20px;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+    background-color: #ffb6c1;
+    border-radius: 10px;
+  }
+  .redirect-button:hover{
+    background-color: black;
+    color: white;
+  }
+  .home-button{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+    background-color: #ffb6c1;
+    border-radius: 10px;
+    text-align: center;
   }

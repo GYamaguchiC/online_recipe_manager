@@ -8,7 +8,12 @@
 <div style="text-align: center;">
     <div class="project-description">
         <h1>Online Recipe Manager</h1>
-        <p>Welcome to Online Recipe Manager, a web-based application designed to help users search, view, and save their favorite recipes. This platform provides a user-friendly interface that allows users to create an account, log in securely, and easily search for recipes based on ingredients.
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('logout')}}", class="redirect-button">Logout</a>
+        {% else %}
+            <a href="{{url_for('login')}}" class = "redirect-button">Login</a>
+        {% endif %}
+        <p> Welcome to Online Recipe Manager, a web-based application designed to help users search, view, and save their favorite recipes. This platform provides a user-friendly interface that allows users to create an account, log in securely, and easily search for recipes based on ingredients.
 
             The recipe manager enables users to view recipe details such as ingredients, instructions, and nutritional information. Users can save their favorite recipes to their account, which will be conveniently displayed on their profile page. In addition, users can add their own recipes to the database, which can be searched by other users.
             
