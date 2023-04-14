@@ -1,8 +1,9 @@
+from datetime import datetime
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import os
@@ -30,6 +31,15 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(80), nullable = False)
 
 
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255), nullable = False)
+    ingredients = db.Column(db.String(1000), nullable = False)
+    method = db.Column(db.String(5000), nullable = False)
+    date_created = db.Column(db.DateTime, default = datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship('User', backref='recipes')
+
 class RegisterForm(FlaskForm):
     username = StringField(validators = [InputRequired(), Length(min = 4, max= 20)], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Password"})
@@ -39,6 +49,13 @@ class RegisterForm(FlaskForm):
         existing_user_username = User.query.filter_by(username = username.data).first()
         if existing_user_username:
             raise ValidationError("That username already exists. Please choose a different one.")
+        
+    
+class RecipeForm(FlaskForm):
+    title = StringField('Title', validators=[InputRequired()])
+    ingredients = TextAreaField('Ingredients', validators=[InputRequired()])
+    method = TextAreaField('Method', validators=[InputRequired()])
+    submit = SubmitField('Add Recipe')
         
 class LoginForm(FlaskForm):
     username = StringField(validators = [InputRequired(), Length(min = 4, max= 20)], render_kw={"placeholder": "Username"})
@@ -88,8 +105,20 @@ def register():
     
     return render_template('register.html', form=form)
 
-@app.route('/recipe')
-def recipe_register():
+@app.route('/add_recipe', methods=['GET', 'POST'])
+@login_required
+def add_recipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe(title=form.title.data,
+                        ingredients=form.ingredients.data,
+                        method=form.method.data,
+                        author=current_user)
+        db.session.add(recipe)
+        db.session.commit()
+        return redirect(url_for('home'))
+    
+    return render_template('add_recipe.html', form=form)
 
 
 if __name__ == "__main__":

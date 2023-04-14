@@ -9,7 +9,12 @@
     {% block head%}{% endblock %}
 </head>
 <body>
-    <a href="{{url_for('home')}}", class="home-button">Online Recipe Manager</a>
+    <div class="home-button">
+        <a href="{{url_for('home')}}">Online Recipe Manager</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{url_for('add_recipe')}}">Add Recipe</a>
+        {% endif %}
+    </div>
     <div class="container">
         {% block body%}{% endblock %}
     </div>

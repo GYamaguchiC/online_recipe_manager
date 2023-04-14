@@ -10,7 +10,7 @@
 
     <a href="{{url_for('login')}}" class = "redirect-button">Already have an account? Log In</a>
     
-    <form method="POST" action="">
+    <form method="POST" action="" class="authentication_form">
         {{ form.hidden_tag() }}
         {{ form.username }}
         {{ form.password }}

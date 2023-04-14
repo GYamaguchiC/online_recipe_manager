@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head%}
+
+{% endblock %}
+
+{% block body%}
+<div style="text-align: center;">
+    <h1>Add Recipe</h1>
+    <a href="{{url_for('logout')}}", class="redirect-button">Logout</a>
+
+    <form method="POST" action="{{url_for('add_recipe')}}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.title.label(class='form-control-label') }}
+            {{ form.title(class='form-control form-control-lg', placeholder='Recipe Title', style='height: 50px; text-align: center') }}
+        </div>
+        <div class="form-group">
+            {{ form.ingredients.label(class='form-control-label') }}
+            {{ form.ingredients(class='form-control form-control-lg', placeholder='Enter ingredients separated by commas') }}
+        </div>
+        <div class="form-group">
+            {{ form.method.label(class='form-control-label') }}
+            {{ form.method(class='form-control form-control-lg', placeholder='Enter method instructions') }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class='btn btn-lg btn-primary') }}
+        </div>
+    </form>
+</div>
+{% endblock %}
