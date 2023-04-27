@@ -9,12 +9,13 @@
     {% block head%}{% endblock %}
 </head>
 <body>
-    <div class="home-button">
-        <a href="{{url_for('home')}}">Online Recipe Manager</a>
-        {% if current_user.is_authenticated %}
-        <a href="{{url_for('add_recipe')}}">Add Recipe</a>
-        {% endif %}
-    </div>
+        <div class="home-button">
+            <a href="{{url_for('home')}}">Online Recipe Manager</a>
+            <a href="{{url_for('see_recipes')}}">Recipes</a>
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('add_recipe')}}">Add Recipe</a>
+            {% endif %}
+        </div>
     <div class="container">
         {% block body%}{% endblock %}
     </div>

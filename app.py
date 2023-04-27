@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -67,7 +67,7 @@ class LoginForm(FlaskForm):
 def home():
     return render_template('index.html')
 
-@app.route('/dashoard', methods=['GET', 'POST'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     return render_template('dashboard.html')
@@ -119,6 +119,22 @@ def add_recipe():
         return redirect(url_for('home'))
     
     return render_template('add_recipe.html', form=form)
+
+
+@app.route('/see_recipes')
+def see_recipes():
+    page = request.args.get('page', 1, type=int)
+    per_page = 2
+    recipes = Recipe.query.paginate(page=page, per_page=per_page)
+    return render_template('see_recipes.html', recipes=recipes)
+
+
+@app.route('/recipe/<int:recipe_id>')
+def recipe_detail(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    if recipe is None:
+        abort(404)
+    return render_template('recipe_detail.html', recipe=recipe)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head%}
+
+{% endblock %}
+
+{% block body%}
+    <h1>Recipes</h1>
+    {% for recipe in recipes.items %}
+        <button class="recipe-button">
+            <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">
+                <span class="recipe-title">{{ recipe.title }}</span>
+                <hr>
+                <span class="recipe-ingredients">{{ recipe.ingredients }}</span>
+            </a>
+        </button>
+    {% endfor %}
+
+    {% if recipes.has_prev %}
+        <a href="{{ url_for('see_recipes', page=recipes.prev_num) }}">Previous</a>
+    {% endif %}
+
+    {% for num in recipes.iter_pages() %}
+        {% if num %}
+            {% if num != recipes.page %}
+                <a href="{{ url_for('see_recipes', page=num) }}">{{ num }}</a>
+            {% else %}
+                <strong>{{ num }}</strong>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+    {% if recipes.has_next %}
+        <a href="{{ url_for('see_recipes', page=recipes.next_num) }}">Next</a>
+    {% endif %}
+
+{% endblock %}
